@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Popover API | Jon the Coder</title>
+    <link rel="stylesheet" type="text/css" href="../../css/styles.css" />
+    <link rel="stylesheet" type="text/css" href="./popovers.css" />
+  </head>
+  <body>
+    <header>
+      <h1 class="site-heading">
+        <a href="../../index.html">👋</a>
+      </h1>
+    </header>
+    <main>
+      <article>
+        <h2>Popover API</h2>
+        <p>
+          The
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/API/Popover_API"
+            target="_blank"
+            >Popover API</a
+          >
+          is available in every major browser starting in April 2024. It can be
+          used to create native popovers, popups, dialogs, tooltips, and similar
+          UI components.
+        </p>
+        <h3>Usage</h3>
+        <p>
+          Add the <code>popover</code> attribute to turn
+          <em>nearly anything</em> into a popover.
+        </p>
+        <pre class="code-block">
+&lt;article <em>popover</em>&gt;&hellip;&lt;/article&gt;</pre
+        >
+        <p>But now we need a way to open it.</p>
+
+        <h4>Open with HTML</h4>
+        <p>
+          Add <code>popovertarget</code> to a <code>button</code> with the
+          popover's id.
+        </p>
+        <pre class="code-block">
+&lt;button type=&quot;button&quot; <em>popovertarget=&quot;a-popover&quot;</em>&gt;Open&lt;/button&gt;
+
+&lt;article <em>id=&quot;a-popover&quot; popover</em>&gt;&hellip;&lt;/article&gt;</pre>
+        <button type="button" popovertarget="a-popover">Open</button>
+
+        <h4>Open with Javascript</h4>
+        <p>Use the element's <code>showPopover</code> method.</p>
+        <div class="code-runner">
+          <div class="code-editor">
+            <textarea id="open-with-js" rows="3">
+document
+  .querySelector('#a-popover')
+  .showPopover()</textarea
+            >
+          </div>
+          <button
+            type="button"
+            onclick="eval(document.querySelector('#open-with-js').value)"
+          >
+            Run
+          </button>
+        </div>
+        <div id="a-popover" popover>
+          <h1>Popover</h1>
+          <p>
+            The background has been styled using the
+            <code>::backdrop</code> pseudo-element.
+          </p>
+          <pre class="code-block">
+#a-popover {
+  &::backdrop {
+    backdrop-filter: blur(4px);
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}
+          </pre>
+        </div>
+        <section style="position: relative">
+          <h3>Closing Popups</h3>
+          <p>
+            By default, a popover can be closed with the keyboard or by clicking
+            outside of the popover.
+          </p>
+          <h4>Overriding the Defaults</h4>
+          <p>
+            Setting <code>popover="manual"</code> prevents the default behavior.
+            Use <code>popovertargetaction="hide"</code> to create a button that
+            allows users to close the popover.
+          </p>
+          <pre class="code-block">
+&lt;ul id=&quot;menu-popover&quot; <em>popover="manual"</em>&gt;
+  &lt;li&gt;
+    &lt;button
+      type="button"
+      popovertarget="menu-popover"
+      <em>popovertargetaction="hide"</em>
+    &gt;
+      Close menu
+    &lt;/button&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</pre
+          >
+          <button
+            type="button"
+            popovertarget="menu-popover"
+            style="anchor-name: --menu-btn"
+            popovertargetaction="show"
+          >
+            Open Menu
+          </button>
+          <ul
+            id="menu-popover"
+            popover="manual"
+            class="dropdown"
+            role="menu"
+            style="position-anchor: --menu-btn"
+          >
+            <li role="menuitem">&hellip;</li>
+            <li role="none">
+              <button
+                type="button"
+                role="menuitem"
+                popovertarget="menu-popover"
+                popovertargetaction="hide"
+              >
+                Close menu
+              </button>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <p>
+            <span
+              style="
+                padding: 8px;
+                border-radius: 20px;
+                background-color: red;
+                color: white;
+              "
+              >Work in Progress</span
+            >
+          </p>
+        </section>
+      </article>
+    </main>
+  </body>
+</html>

@@ -1,4 +1,5 @@
 :root {
+  --bezel: 4px;
   --page-bg: #f0f0f0;
 }
 
@@ -17,6 +18,42 @@ main {
 
 .post-list a {
   font-weight: 600;
+}
+
+.code-block {
+  font-family: monospace;
+  background-color: #f8f8f8;
+  border-radius: var(--bezel);
+  padding: 1em;
+  max-width: 100%;
+  overflow: auto;
+
+  em {
+    color: rgb(104, 0, 148);
+    font-style: normal;
+    font-weight: 700;
+  }
+}
+
+.code-runner {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+
+  .code-editor {
+    display: flex;
+    width: 100%;
+
+    textarea {
+      flex: 1;
+
+      border-radius: var(--bezel);
+      border: 0;
+      padding: 0.5rem;
+      color: #333;
+    }
+  }
 }
 
 .site-heading {

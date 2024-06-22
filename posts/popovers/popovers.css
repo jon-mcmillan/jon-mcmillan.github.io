@@ -1,0 +1,74 @@
+:root {
+  --menu-spacer: 4px;
+}
+
+[popover]:not(.toast) {
+  border: none;
+}
+
+#a-popover {
+  border-radius: 0.25rem;
+  padding: 1rem;
+
+  &::backdrop {
+    backdrop-filter: blur(4px);
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}
+
+.dropdown {
+  --menu-pl: 16px;
+
+  inset-area: right;
+  margin: 0 0 0 var(--menu-spacer);
+  min-width: 150px;
+
+  list-style: none;
+  padding: 0;
+  background-color: white;
+  border-radius: var(--bezel);
+
+  li {
+    display: flex;
+    margin: 0;
+    min-height: 32px;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid #aaa;
+    }
+
+    &:not(:has(button)) {
+      padding-left: var(--menu-pl);
+    }
+
+    > button:first-child {
+      flex: 1;
+      border: none;
+      background-color: transparent;
+      text-align: left;
+      padding-left: var(--menu-pl);
+    }
+  }
+}
+
+.toast {
+  &:popover-open {
+    position: absolute;
+    inset: unset;
+    bottom: 8px;
+    right: 8px;
+  }
+
+  &::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}
+
+.modal {
+  max-width: 30ch;
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+}
