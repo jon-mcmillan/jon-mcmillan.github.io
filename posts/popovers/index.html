@@ -29,14 +29,14 @@
             target="_blank"
             >Popover API</a
           >
-          is available in every major browser starting in April 2024. It can be
-          used to create native popovers, popups, dialogs, tooltips, and similar
-          UI components.
+          is available in every major browser starting in April 2024. It enables
+          creating native popovers, popups, dialogs, tooltips, and similar UI
+          components.
         </p>
         <h3>Usage</h3>
         <p>
-          Add the <code>popover</code> attribute to turn
-          <em>nearly anything</em> into a popover.
+          Add the <code>popover</code> attribute to elements to convert them
+          into popovers.
         </p>
         <pre class="code-block">
 &lt;article <b>popover</b>&gt;&hellip;&lt;/article&gt;</pre
@@ -46,7 +46,7 @@
         <h4>Open with HTML</h4>
         <p>
           Add <code>popovertarget</code> to a <code>button</code> with the
-          popover's id.
+          popover's ID.
         </p>
         <pre class="code-block">
 &lt;button type=&quot;button&quot; <b>popovertarget=&quot;a-popover&quot;</b>&gt;Open&lt;/button&gt;
@@ -55,7 +55,7 @@
         <button type="button" popovertarget="a-popover">Open</button>
 
         <h4>Open with Javascript</h4>
-        <p>Use the element's <code>showPopover</code> method.</p>
+        <p>Use the <code>showPopover</code> method.</p>
         <div class="code-runner">
           <div class="code-editor">
             <textarea id="open-with-js" rows="3">
@@ -74,7 +74,7 @@ document
         <div id="a-popover" class="card" popover>
           <h1>Popover</h1>
           <p>
-            The background has been styled using the
+            The background is styled using the
             <code>::backdrop</code> pseudo-element.
           </p>
           <div class="code-editor">
@@ -93,13 +93,13 @@ document
         <h3>Closing Popups</h3>
         <p>
           By default, a popover can be closed with the keyboard or by clicking
-          outside of the popover.
+          outside of it.
         </p>
         <h4>Overriding the Defaults</h4>
         <p>
-          Setting <code>popover="manual"</code> prevents the default behavior.
-          Use <code>popovertargetaction="hide"</code> to create a button that
-          allows users to close the popover.
+          Use <code>popover="manual"</code> to prevent default behavior. Add
+          <code>popovertargetaction="hide"</code> to a button for closing the
+          popover.
         </p>
         <pre class="code-block">
 &lt;dialog id=&quot;manual-popover&quot; <b>popover="manual"</b>&gt;
@@ -142,16 +142,14 @@ document
         </h3>
         <p>
           <strong
-            >The background is interactive when using a
-            <code>popover</code></strong
-          >. To make the background non-interactive, we have to open a
+            >Backgrounds remain interactive with <code>popover</code></strong
+          >. Use a
           <a
             href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog"
             target="_blank"
             ><code>&lt;dialog&gt;</code></a
           >
-          as a <b class="term">modal</b>. To do that, we need the
-          <code>showModal</code> method.
+          as a <b class="term">modal</b> to make the background non-interactive.
         </p>
         <div class="code-runner">
           <div class="code-editor">
@@ -179,8 +177,8 @@ document
         <h3>Example Components</h3>
         <h4>Snackbar, Toast, and Notifications</h4>
         <p>
-          The popover API makes it easy to create notifications like toasts and
-          snackbar components with just a little CSS.
+          The popover API simplifies creating notifications like toasts and
+          snackbar components with minimal CSS.
         </p>
         <div id="notification" class="notification success" popover="manual">
           <div style="display: flex; align-items: center; gap: 12px">
@@ -201,13 +199,13 @@ document
           </p>
         </aside>
         <p>
-          The popover API along with the new
+          The popover API and the new
           <a
             href="https://developer.chrome.com/blog/anchor-positioning-api"
             target="_blank"
             >CSS anchor positioning</a
           >
-          unlocks the ability to easily create tooltips.
+          allow easy creation of tooltips.
         </p>
         <pre class="code-block">
 &lt;span
