@@ -1,32 +1,37 @@
-:root {
-  --menu-spacer: 4px;
-}
-
-[popover]:not(.toast) {
-  border: none;
-}
-
-#a-popover {
+.card {
   border-radius: 0.25rem;
   padding: 1rem;
 
-  &::backdrop {
-    backdrop-filter: blur(4px);
-    background-color: rgba(0, 0, 0, 0.5);
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .close {
+      aspect-ratio: 1;
+      background-color: transparent;
+      border-radius: 100%;
+      border: 2px solid #ccc;
+      font-weight: 900;
+    }
   }
+}
+
+.blur-backdrop::backdrop {
+  backdrop-filter: blur(4px);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .dropdown {
   --menu-pl: 16px;
 
-  inset-area: right;
-  margin: 0 0 0 var(--menu-spacer);
+  inset-area: bottom span-right;
+  margin: var(--menu-spacer) 0 0 0;
   min-width: 150px;
 
   list-style: none;
   padding: 0;
   background-color: white;
-  border-radius: var(--bezel);
 
   li {
     display: flex;
@@ -51,24 +56,45 @@
   }
 }
 
-.toast {
-  &:popover-open {
-    position: absolute;
-    inset: unset;
-    bottom: 8px;
-    right: 8px;
-  }
+.notification {
+  &.success {
+    background-color: #d4edda;
+    color: #155724;
 
-  &::backdrop {
-    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: var(--bezel);
+    inset: auto 1rem 1rem auto;
+    padding: 0.5em 1em;
   }
 }
 
-.modal {
-  max-width: 30ch;
+@supports (position-anchor: --anchor) {
+  .tooltip {
+    inset-area: top;
+    margin: 0;
 
-  ul {
-    list-style-type: none;
-    padding: 0;
+    background-color: #333;
+    color: white;
+    border-radius: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    border: none;
   }
+}
+
+@supports not (position-anchor: --anchor) {
+  .tooltip {
+    color: transparent;
+
+    &::before {
+      content: "🛑 Your browser does not support the `position-anchor` property.";
+      color: red;
+    }
+
+    &::backdrop {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
+.tooltip-anchor {
+  border-bottom: 2px dashed purple;
 }

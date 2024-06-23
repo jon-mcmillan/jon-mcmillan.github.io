@@ -6,6 +6,12 @@
     <title>Popover API | Jon the Coder</title>
     <link rel="stylesheet" type="text/css" href="../../css/styles.css" />
     <link rel="stylesheet" type="text/css" href="./popovers.css" />
+    <style id="popover-style">
+      #a-popover::backdrop {
+        backdrop-filter: blur(4px);
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+    </style>
   </head>
   <body>
     <header>
@@ -33,7 +39,7 @@
           <em>nearly anything</em> into a popover.
         </p>
         <pre class="code-block">
-&lt;article <em>popover</em>&gt;&hellip;&lt;/article&gt;</pre
+&lt;article <b>popover</b>&gt;&hellip;&lt;/article&gt;</pre
         >
         <p>But now we need a way to open it.</p>
 
@@ -43,9 +49,9 @@
           popover's id.
         </p>
         <pre class="code-block">
-&lt;button type=&quot;button&quot; <em>popovertarget=&quot;a-popover&quot;</em>&gt;Open&lt;/button&gt;
+&lt;button type=&quot;button&quot; <b>popovertarget=&quot;a-popover&quot;</b>&gt;Open&lt;/button&gt;
 
-&lt;article <em>id=&quot;a-popover&quot; popover</em>&gt;&hellip;&lt;/article&gt;</pre>
+&lt;article <b>id=&quot;a-popover&quot; popover</b>&gt;&hellip;&lt;/article&gt;</pre>
         <button type="button" popovertarget="a-popover">Open</button>
 
         <h4>Open with Javascript</h4>
@@ -54,99 +60,206 @@
           <div class="code-editor">
             <textarea id="open-with-js" rows="3">
 document
-  .querySelector('#a-popover')
+  .getElementById('a-popover')
   .showPopover()</textarea
             >
           </div>
           <button
             type="button"
-            onclick="eval(document.querySelector('#open-with-js').value)"
+            onclick="eval(document.getElementById('open-with-js').value)"
           >
             Run
           </button>
         </div>
-        <div id="a-popover" popover>
+        <div id="a-popover" class="card" popover>
           <h1>Popover</h1>
           <p>
             The background has been styled using the
             <code>::backdrop</code> pseudo-element.
           </p>
-          <pre class="code-block">
-#a-popover {
-  &::backdrop {
-    backdrop-filter: blur(4px);
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-}
-          </pre>
+          <div class="code-editor">
+            <textarea
+              oninput="document.getElementById('popover-style').innerHTML = event.currentTarget.value"
+              rows="4"
+            >
+#a-popover::backdrop {
+  backdrop-filter: blur(4px);
+  background-color: rgba(0, 0, 0, 0.5);
+}</textarea
+            >
+          </div>
+          <p>Try changing the blur or color.</p>
         </div>
-        <section style="position: relative">
-          <h3>Closing Popups</h3>
+        <h3>Closing Popups</h3>
+        <p>
+          By default, a popover can be closed with the keyboard or by clicking
+          outside of the popover.
+        </p>
+        <h4>Overriding the Defaults</h4>
+        <p>
+          Setting <code>popover="manual"</code> prevents the default behavior.
+          Use <code>popovertargetaction="hide"</code> to create a button that
+          allows users to close the popover.
+        </p>
+        <pre class="code-block">
+&lt;dialog id=&quot;manual-popover&quot; <b>popover="manual"</b>&gt;
+  &hellip;
+  &lt;button type="button"
+    <b>popovertarget="manual-popover"</b>
+    <b>popovertargetaction="hide"</b>
+  &gt;
+    X
+  &lt;/button&gt;
+&lt;/dialog&gt;</pre
+        >
+        <button
+          type="button"
+          popovertarget="manual-popover"
+          popovertargetaction="show"
+        >
+          Open Manual Popover
+        </button>
+        <div id="manual-popover" popover="manual" class="card">
+          <header>
+            <h2>Manual Popover</h2>
+            <button
+              type="button"
+              popovertarget="manual-popover"
+              popovertargetaction="hide"
+              class="close"
+            >
+              X
+            </button>
+          </header>
           <p>
-            By default, a popover can be closed with the keyboard or by clicking
-            outside of the popover.
+            While you're here, try clicking on buttons or links behind this
+            popup.
           </p>
-          <h4>Overriding the Defaults</h4>
-          <p>
-            Setting <code>popover="manual"</code> prevents the default behavior.
-            Use <code>popovertargetaction="hide"</code> to create a button that
-            allows users to close the popover.
-          </p>
-          <pre class="code-block">
-&lt;ul id=&quot;menu-popover&quot; <em>popover="manual"</em>&gt;
-  &lt;li&gt;
-    &lt;button
-      type="button"
-      popovertarget="menu-popover"
-      <em>popovertargetaction="hide"</em>
-    &gt;
-      Close menu
-    &lt;/button&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;</pre
+        </div>
+        <h3>
+          <span style="color: rgb(255, 48, 48)">⚠️</span> Interactive
+          Backgrounds
+        </h3>
+        <p>
+          <strong
+            >The background is interactive when using a
+            <code>popover</code></strong
+          >. To make the background non-interactive, we have to open a
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog"
+            target="_blank"
+            ><code>&lt;dialog&gt;</code></a
           >
+          as a <b class="term">modal</b>. To do that, we need the
+          <code>showModal</code> method.
+        </p>
+        <div class="code-runner">
+          <div class="code-editor">
+            <textarea id="dialog-example" rows="3">
+document
+  .getElementById('a-dialog')
+  .showModal()</textarea
+            >
+          </div>
           <button
             type="button"
-            popovertarget="menu-popover"
-            style="anchor-name: --menu-btn"
-            popovertargetaction="show"
+            onclick="eval(document.getElementById('dialog-example').value)"
           >
-            Open Menu
+            Run
           </button>
-          <ul
-            id="menu-popover"
-            popover="manual"
-            class="dropdown"
-            role="menu"
-            style="position-anchor: --menu-btn"
-          >
-            <li role="menuitem">&hellip;</li>
-            <li role="none">
-              <button
-                type="button"
-                role="menuitem"
-                popovertarget="menu-popover"
-                popovertargetaction="hide"
-              >
-                Close menu
-              </button>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <p>
-            <span
-              style="
-                padding: 8px;
-                border-radius: 20px;
-                background-color: red;
-                color: white;
-              "
-              >Work in Progress</span
+        </div>
+        <dialog id="a-dialog" class="card">
+          <form method="dialog">
+            <p>
+              Nothing will happen when clicking on buttons behind this dialog.
+            </p>
+            <button type="submit">Close</button>
+          </form>
+        </dialog>
+        <h3>Example Components</h3>
+        <h4>Snackbar, Toast, and Notifications</h4>
+        <p>
+          The popover API makes it easy to create notifications like toasts and
+          snackbar components with just a little CSS.
+        </p>
+        <div id="notification" class="notification success" popover="manual">
+          <div style="display: flex; align-items: center; gap: 12px">
+            <span style="font-size: 24px">🎉</span><span>It works</span>
+          </div>
+        </div>
+        <button type="button" popovertarget="notification">
+          Toggle Notification
+        </button>
+        <h4>🧪 Tooltip</h4>
+        <aside style="border-left: 1px dotted; padding: 0.5em">
+          <p style="margin: 0">
+            This demo
+            <a href="https://caniuse.com/css-anchor-positioning" target="_blank"
+              >only works in Chromium 125+ browsers</a
             >
+            at the time of writing.
           </p>
-        </section>
+        </aside>
+        <p>
+          The popover API along with the new
+          <a
+            href="https://developer.chrome.com/blog/anchor-positioning-api"
+            target="_blank"
+            >CSS anchor positioning</a
+          >
+          unlocks the ability to easily create tooltips.
+        </p>
+        <pre class="code-block">
+&lt;span
+  <b>onmouseenter</b>="document.querySelector('.tooltip')<b>.showPopover()</b>"
+  <b>onmouseleave</b>="document.querySelector('.tooltip')<b>.hidePopover()</b>"
+  style="<b>anchor-name: --a-name</b>"
+&gt;
+  &hellip;
+&lt;/span&gt;
+
+&lt;div
+  class="tooltip"
+  <b>popover="manual"</b>
+  <b>style="position-anchor: --a-name; inset-area: top; margin: 0;"</b>
+&gt;
+  Tooltip
+&lt;/div&gt;</pre>
+        <p style="text-align: center; margin: 2rem 0">
+          <span
+            class="tooltip-anchor"
+            style="anchor-name: --tooltip-content"
+            onmouseenter="document.querySelector('.tooltip').showPopover()"
+            onmouseleave="document.querySelector('.tooltip').hidePopover()"
+          >
+            Hover over me.
+          </span>
+        </p>
+        <div
+          class="tooltip"
+          popover="manual"
+          style="position-anchor: --tooltip-content"
+        >
+          Tooltip
+        </div>
       </article>
+      <h3>Further Reading</h3>
+      <ul>
+        <li>
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/API/Popover_API"
+            target="_blank"
+            >MDN: Popover API</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_anchor_positioning/Using"
+            target="_blank"
+            >MDN: Using CSS anchor positioning</a
+          >
+        </li>
+      </ul>
     </main>
   </body>
 </html>
