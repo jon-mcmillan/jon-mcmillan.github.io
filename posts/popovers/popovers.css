@@ -61,7 +61,7 @@
     background-color: #d4edda;
     color: #155724;
 
-    border-radius: var(--bezel);
+    border-radius: var(--border-radius-normal);
     inset: auto 1rem 1rem auto;
     padding: 0.5em 1em;
   }
