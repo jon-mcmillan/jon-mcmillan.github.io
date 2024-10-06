@@ -1,6 +1,24 @@
 :root {
   --bezel: 4px;
   --page-bg: #f0f0f0;
+  --gap-medium: 1rem;
+
+  --color-primary: #2d3748;
+  --color-primary-hover: #4a5568;
+  --color-secondary: #4a5568;
+  --color-secondary-hover: #718096;
+  --color-background: #f7fafc;
+  --color-surface: #ffffff;
+  --color-text-primary: #1a202c;
+  --color-text-secondary: #4a5568;
+  --color-text-muted: #a0aec0;
+  --color-border: #e2e8f0;
+  --color-link: #2b6cb0;
+  --color-link-hover: #2c5282;
+  --color-accent: #d69e2e;
+  --color-success: #38a169;
+  --color-error: #e53e3e;
+  --color-warning: #dd6b20;
 }
 
 body {
@@ -49,19 +67,61 @@ main {
 
   textarea {
     flex: 1;
-
     border-radius: var(--bezel);
     border: 0;
     padding: 0.5rem;
     color: #333;
+
     &:not(:focus) {
       border-left: 3px solid blue;
     }
   }
 }
 
-.site-heading {
-  a {
+.sr-only {
+  position: absolute;
+
+  border-width: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  h1 a {
     text-decoration: none;
+  }
+
+  nav {
+    ul {
+      display: flex;
+      gap: var(--gap-medium);
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    a:has(.social-icon) {
+      color: var(--color-link);
+
+      &:focus-visible,
+      &:hover {
+        color: var(--color-link-hover);
+      }
+    }
+
+    .social-icon {
+      fill: currentColor;
+      height: 1.5rem;
+      width: 1.5rem;
+    }
   }
 }
